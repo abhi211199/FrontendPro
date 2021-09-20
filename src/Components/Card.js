@@ -16,6 +16,16 @@ function setLikes(id) {
     window.localStorage.setItem("likes",likes);
 }
 
+function setLikesList(id, val) {
+    let likesList = window.localStorage.getItem("likesList");
+    likesList=JSON.parse(likesList);
+    likesList[id]=val;
+    likesList[id]["isLiked"] = getLikes(id);
+    likesList=JSON.stringify(likesList);
+    console.log(likesList)
+    window.localStorage.setItem("likesList",likesList);
+}
+
 export default function Card(props) {
     const [like, setLike] = useState(getLikes(props.date+props.title));
     
@@ -27,6 +37,8 @@ export default function Card(props) {
             onAction: () => {
                 setLike(!like);
                 setLikes(props.date+props.title);
+                setLikesList(props.date+props.title,{...props});
+                props.trigger();
             },
         }}
         description={props.date}

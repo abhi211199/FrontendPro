@@ -1,22 +1,23 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import Card from './Card';
 import {AppProvider} from "@shopify/polaris";
 import en from '@shopify/polaris/locales/en.json';
 
-export default function Images(props) {
+export default function LikedImages(props) {
     const [data, setData] = useState([]);
 
     useEffect(()=>{ 
-        axios.get(`${process.env.REACT_APP_URL}&count=10`)
-        .then(function (response) {
-            setData(response.data);
-            props.count(response.data.length);
-        })
-        .catch(function (error) {
-            console.log(error);
+        let likesList = window.localStorage.getItem("likesList");
+        likesList=JSON.parse(likesList);
+        console.log(likesList)
+        let likesArray = [];
+        Object.keys(likesList).forEach(key=>{
+            if(likesList[key]["isLiked"])
+            likesArray.push(likesList[key]);
         });
+        setData(likesArray);
+        props.count(likesArray.length);
     },[]);
 
     return(
