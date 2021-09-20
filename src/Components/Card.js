@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import {MediaCard} from '@shopify/polaris';
 
-export default function Card(props) {
-    const [like, setLike] = useState(false);
+function getLikes(id) {
+    let likes = window.localStorage.getItem("likes");
+    likes=JSON.parse(likes);
+    return likes[id];
+}
 
+function setLikes(id) {
+    let likes = window.localStorage.getItem("likes");
+    likes=JSON.parse(likes);
+    likes[id]=!likes[id];
+    likes=JSON.stringify(likes);
+    window.localStorage.setItem("likes",likes);
+}
+
+export default function Card(props) {
+    const [like, setLike] = useState(getLikes(props.date+props.title));
+    
     return (
       <MediaCard
         title={props.title}
         primaryAction={{
-            content:  "like" ,
-            onAction: () => {},
+            content: like ? "dislike":"like",
+            onAction: () => {
+                setLike(!like);
+                setLikes(props.date+props.title);
+            },
         }}
-        description={props.explanation.substr(0, 200)+"..."}
+        description={props.date}
         popoverActions={[{content: 'Dismiss', onAction: () => {}}]}
     >
         <img
