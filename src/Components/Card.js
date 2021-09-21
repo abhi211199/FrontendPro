@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import {MediaCard} from '@shopify/polaris';
+import {MediaCard, Icon} from '@shopify/polaris';
+import {
+    ThumbsDownMajor,
+    ThumbsUpMajor
+    } from '@shopify/polaris-icons';
 
 function getLikes(id) {
     let likes = window.localStorage.getItem("likes");
@@ -33,7 +37,7 @@ export default function Card(props) {
       <MediaCard
         title={props.title}
         primaryAction={{
-            content: like ? "dislike":"like",
+            content: like ? <Icon source={ThumbsDownMajor} color="base" /> : <Icon source={ThumbsUpMajor} color="base" />,
             onAction: () => {
                 setLike(!like);
                 setLikes(props.date+props.title);

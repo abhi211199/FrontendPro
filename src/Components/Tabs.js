@@ -8,7 +8,7 @@ export default function TabsWithBadgeExample(props) {
 
     const [selected, setSelected] = useState(0);
     const [imagesCount, setImagesCount] = useState(0);
-    const [likedImagesCount, setLikedImagesCount] = useState(0);
+    const [likedImagesCount, setLikedImagesCount] = useState(true);
     const [msg, setMsg] = useState(0);
 
     const getLikedImagesCount= () => {
@@ -52,13 +52,16 @@ export default function TabsWithBadgeExample(props) {
     ];
 
     return (
+        <>
         <Card>
         <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange} fitted>
             <Card.Section >
             { selected==0? <Images count={(val)=>setImagesCount(val)} trigger={()=>getLikedImagesCount()} triggerAPI={props.triggerAPI} setMsg={(msg)=>setMsg(msg)} /> : <LikedImages count={(val)=>setLikedImagesCount(val)} trigger={()=>getLikedImagesCount()} setMsg={(msg)=>setMsg(msg)} /> }
             </Card.Section>
         </Tabs>
-        {msg && <Toast message={msg} status={msg} />}
         </Card>
+        {msg && <Toast message={msg} status={msg} />}
+
+        </>
     );
 }

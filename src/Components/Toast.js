@@ -13,7 +13,7 @@ export default function ToastExample(props) {
     useEffect(()=>setActive(true),[props.status]);
     
     return (
-        <div style={{height: '250px'}}>
+        <div>
         <Frame>
             {toastMarkup}
         </Frame>
