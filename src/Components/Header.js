@@ -49,6 +49,9 @@ export default function TopBarExample(props) {
         {
           items: [{content: 'Collaborate via GitHub', icon: LinkMinor, url: 'https://github.com/abhi211199'}],
         },
+        {
+          items: [{content: 'Connect via GitHub', icon: LinkMinor, url: 'https://twitter.com/abhi211199'}],
+        },
       ]}
       onToggle={toggleIsUserMenuOpen}
       open={isUserMenuOpen}
