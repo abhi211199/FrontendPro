@@ -8,8 +8,13 @@ import en from '@shopify/polaris/locales/en.json';
 export default function Images(props) {
     const [data, setData] = useState([]);
 
-    useEffect(()=>{ 
-        axios.get(`${process.env.REACT_APP_URL}&count=10`)
+    useEffect(()=>{
+        let startDate=window.localStorage.getItem("startDate"), endDate=window.localStorage.getItem("endDate");
+        let URL = `${process.env.REACT_APP_URL}`;
+        if(startDate) URL+=`&start_date=${startDate}`;
+        if(endDate) URL+=`&end_date=${endDate}`;
+        console.log(URL)
+        axios.get(URL)
         .then(function (response) {
             setData(response.data);
             props.count(response.data.length);
@@ -17,7 +22,7 @@ export default function Images(props) {
         .catch(function (error) {
             console.log(error);
         });
-    },[]);
+    },[props.triggerAPI]);
 
     return(
         <AppProvider i18n={en} theme={{colorScheme: "light"}}>

@@ -3,7 +3,7 @@ import {Badge, Card, Tabs} from '@shopify/polaris';
 import Images from './Images';
 import LikedImages from './LikedImages';
 
-export default function TabsWithBadgeExample() {
+export default function TabsWithBadgeExample(props) {
 
     const [selected, setSelected] = useState(0);
     const [imagesCount, setImagesCount] = useState(0);
@@ -11,6 +11,7 @@ export default function TabsWithBadgeExample() {
 
     const getLikedImagesCount= () => {
         let likesList = window.localStorage.getItem("likesList");
+        if(likesList==undefined)return;
         likesList = JSON.parse(likesList);
         var c=0;
         Object.keys(likesList).forEach(val=>{
@@ -52,7 +53,7 @@ export default function TabsWithBadgeExample() {
         <Card>
         <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange} fitted>
             <Card.Section >
-            { selected==0? <Images count={(val)=>setImagesCount(val)} trigger={()=>getLikedImagesCount()} /> : <LikedImages count={(val)=>setLikedImagesCount(val)} trigger={()=>getLikedImagesCount()}/> }
+            { selected==0? <Images count={(val)=>setImagesCount(val)} trigger={()=>getLikedImagesCount()} triggerAPI={props.triggerAPI} /> : <LikedImages count={(val)=>setLikedImagesCount(val)} trigger={()=>getLikedImagesCount()}/> }
             </Card.Section>
         </Tabs>
         </Card>

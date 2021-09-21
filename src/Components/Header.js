@@ -3,7 +3,7 @@ import {AppProvider, Button, Frame, TopBar, Stack, Card, Collapsible, Link} from
 import DatePicker from './DatePicker';
 import Avatar from '../Assets/avatar1.jpg';
 
-export default function TopBarExample() {
+export default function TopBarExample(props) {
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
 
 
@@ -17,15 +17,14 @@ export default function TopBarExample() {
   }, []);
 
   useEffect(()=>{
+    if(!isSecondaryMenuOpen) 
+      props.triggerAPI();
   },[isSecondaryMenuOpen]);
 
   const theme = {
     logo: {
       width: 50,
       topBarSource: Avatar,
-        // 'https://cdn.shopify.com/s/files/1/0446/6937/files/jaded-pixel-logo-color.svg?6215648040070010999',
-      url: 'http://jadedpixel.com',
-      accessibilityLabel: 'Jaded Pixel',
     },
   };
 

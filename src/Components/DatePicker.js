@@ -13,7 +13,10 @@ export default function DatePickerExample() {
     [],
   );
 
-  useEffect(()=>{console.log(selectedDates)},[selectedDates])
+  useEffect(()=>{
+    window.localStorage.setItem("startDate",selectedDates["start"].toISOString().split('T')[0]);
+    window.localStorage.setItem("endDate",selectedDates["end"].toISOString().split('T')[0]);
+  },[selectedDates])
 
   return (
     <DatePicker
