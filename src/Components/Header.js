@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {AppProvider, Button, Frame, TopBar, Stack, Card, Collapsible, Link} from '@shopify/polaris';
+import {AppProvider, Button, Frame, TopBar, Stack, Card, Collapsible, Heading} from '@shopify/polaris';
 import DatePicker from './DatePicker';
 import Avatar from '../Assets/avatar1.jpg';
 import en from '@shopify/polaris/locales/en.json';
@@ -50,7 +50,7 @@ export default function TopBarExample(props) {
 
   const topBarMarkup = (
     <TopBar
-      showNavigationToggle
+      // showNavigationToggle
       userMenu={userMenuMarkup}
       secondaryMenu={secondaryMenuMarkup}
       onNavigationToggle={handleNavigationToggle}
@@ -66,7 +66,7 @@ export default function TopBarExample(props) {
       <AppProvider theme={theme} i18n={en}>
         <Frame topBar={topBarMarkup} />
         <div id="datepicker">
-          Current range: {range}
+        <Heading>Current range: {range}</Heading>
             <Card sectioned>
             <Stack vertical>
             <Collapsible

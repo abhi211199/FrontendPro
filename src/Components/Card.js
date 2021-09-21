@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import {MediaCard, Icon} from '@shopify/polaris';
+import {MediaCard, Icon, Tooltip, Button} from '@shopify/polaris';
 import {
     ThumbsDownMajor,
-    ThumbsUpMajor
+    ThumbsUpMajor,
+    ClipboardMinor
     } from '@shopify/polaris-icons';
 
 function getLikes(id) {
@@ -26,7 +27,6 @@ function setLikesList(id, val) {
     likesList[id]=val;
     likesList[id]["isLiked"] = getLikes(id);
     likesList=JSON.stringify(likesList);
-    console.log(likesList)
     window.localStorage.setItem("likesList",likesList);
 }
 
@@ -36,7 +36,7 @@ export default function Card(props) {
     return (
       <MediaCard
         title={props.title}
-        primaryAction={{
+        primaryAction={{    
             content: like ? <Icon source={ThumbsDownMajor} color="base" /> : <Icon source={ThumbsUpMajor} color="base" />,
             onAction: () => {
                 setLike(!like);
@@ -45,8 +45,15 @@ export default function Card(props) {
                 props.trigger();
             },
         }}
+        secondaryAction={{    
+            content: "Share!",
+            onAction: () => {
+                navigator.clipboard.writeText(props.url);
+                props.setMsg(props.title+" copied to Clipboard!");
+            },
+        }}
         description={"Captured Date: "+props.date}
-        popoverActions={[{content: 'Share Pic', onAction: () => {navigator.clipboard.writeText(props.url);props.setMsg(props.title+" copied to Clipboard!");}}]}
+        // popoverActions={[{content: 'Share Pic', onAction: () => {navigator.clipboard.writeText(props.url);props.setMsg(props.title+" copied to Clipboard!");}}]}
     >
         <img
             alt=""

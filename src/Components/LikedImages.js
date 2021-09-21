@@ -10,7 +10,6 @@ export default function LikedImages(props) {
     useEffect(()=>{ 
         let likesList = window.localStorage.getItem("likesList");
         likesList=JSON.parse(likesList);
-        console.log(likesList)
         let likesArray = [];
         Object.keys(likesList).forEach(key=>{
             if(likesList[key]["isLiked"])
