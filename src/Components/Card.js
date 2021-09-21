@@ -41,8 +41,8 @@ export default function Card(props) {
                 props.trigger();
             },
         }}
-        description={props.date}
-        popoverActions={[{content: 'Dismiss', onAction: () => {}}]}
+        description={"Captured Date: "+props.date}
+        popoverActions={[{content: 'Share Pic', onAction: () => {navigator.clipboard.writeText(props.url);props.setMsg(props.title+" copied to Clipboard!");}}]}
     >
         <img
             alt=""

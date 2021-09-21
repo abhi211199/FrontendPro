@@ -1,7 +1,7 @@
 import React, {useCallback, useState, useEffect} from 'react';
 import {DatePicker} from '@shopify/polaris';
 
-export default function DatePickerExample() {
+export default function DatePickerExample(props) {
   const [{month, year}, setDate] = useState({month: 1, year: 2018});
   const [selectedDates, setSelectedDates] = useState({
     start: new Date('Wed Feb 07 2018 00:00:00 GMT-0500 (EST)'),
@@ -14,8 +14,10 @@ export default function DatePickerExample() {
   );
 
   useEffect(()=>{
-    window.localStorage.setItem("startDate",selectedDates["start"].toISOString().split('T')[0]);
-    window.localStorage.setItem("endDate",selectedDates["end"].toISOString().split('T')[0]);
+    let formattedStartDate = selectedDates["start"].toISOString().split('T')[0], formattedEndDate = selectedDates["end"].toISOString().split('T')[0];
+    window.localStorage.setItem("startDate",formattedStartDate);
+    window.localStorage.setItem("endDate",formattedEndDate);
+    props.setRange(formattedStartDate+" - "+formattedEndDate);
   },[selectedDates])
 
   return (

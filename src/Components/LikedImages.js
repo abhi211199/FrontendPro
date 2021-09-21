@@ -25,7 +25,7 @@ export default function LikedImages(props) {
             {
                 data.map((val)=> {
                     if(val?.media_type==="image")
-                    return(<Card {...val} trigger={()=>props.trigger()} />)
+                    return(<Card {...val} trigger={()=>props.trigger()} setMsg={(val)=>props.setMsg(val)} />)
                 })
             }
         </AppProvider>

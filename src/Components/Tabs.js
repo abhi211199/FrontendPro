@@ -2,12 +2,14 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {Badge, Card, Tabs} from '@shopify/polaris';
 import Images from './Images';
 import LikedImages from './LikedImages';
+import Toast from './Toast';
 
 export default function TabsWithBadgeExample(props) {
 
     const [selected, setSelected] = useState(0);
     const [imagesCount, setImagesCount] = useState(0);
     const [likedImagesCount, setLikedImagesCount] = useState(0);
+    const [msg, setMsg] = useState(0);
 
     const getLikedImagesCount= () => {
         let likesList = window.localStorage.getItem("likesList");
@@ -53,9 +55,10 @@ export default function TabsWithBadgeExample(props) {
         <Card>
         <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange} fitted>
             <Card.Section >
-            { selected==0? <Images count={(val)=>setImagesCount(val)} trigger={()=>getLikedImagesCount()} triggerAPI={props.triggerAPI} /> : <LikedImages count={(val)=>setLikedImagesCount(val)} trigger={()=>getLikedImagesCount()}/> }
+            { selected==0? <Images count={(val)=>setImagesCount(val)} trigger={()=>getLikedImagesCount()} triggerAPI={props.triggerAPI} setMsg={(msg)=>setMsg(msg)} /> : <LikedImages count={(val)=>setLikedImagesCount(val)} trigger={()=>getLikedImagesCount()} setMsg={(msg)=>setMsg(msg)} /> }
             </Card.Section>
         </Tabs>
+        {msg && <Toast message={msg} status={msg} />}
         </Card>
     );
 }

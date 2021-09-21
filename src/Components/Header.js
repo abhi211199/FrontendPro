@@ -2,10 +2,11 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {AppProvider, Button, Frame, TopBar, Stack, Card, Collapsible, Link} from '@shopify/polaris';
 import DatePicker from './DatePicker';
 import Avatar from '../Assets/avatar1.jpg';
+import en from '@shopify/polaris/locales/en.json';
 
 export default function TopBarExample(props) {
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
-
+  const [range, setRange] = useState('');
 
   const toggleIsSecondaryMenuOpen = useCallback(
     () => {
@@ -39,7 +40,7 @@ export default function TopBarExample(props) {
     <TopBar.Menu
       activatorContent={
         <span>
-          <Button primary>Set Interval</Button>
+          <Button primary>{isSecondaryMenuOpen ? "Search" : "Set Interval"}</Button>
         </span>
       }
       open={isSecondaryMenuOpen}
@@ -62,9 +63,10 @@ export default function TopBarExample(props) {
 
   return (
     <div>
-      <AppProvider theme={theme}>
+      <AppProvider theme={theme} i18n={en}>
         <Frame topBar={topBarMarkup} />
         <div id="datepicker">
+          Current range: {range}
             <Card sectioned>
             <Stack vertical>
             <Collapsible
@@ -73,7 +75,7 @@ export default function TopBarExample(props) {
                 transition={{duration: '500ms', timingFunction: 'ease-in-out'}}
                 expandOnPrint
             >
-                <DatePicker />
+                <DatePicker setRange={(val)=>setRange(val)} />
             </Collapsible>
             </Stack>
         </Card>
