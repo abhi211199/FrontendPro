@@ -3,8 +3,7 @@ import { useState } from 'react';
 import {MediaCard, Icon, Tooltip, Button} from '@shopify/polaris';
 import {
     ThumbsDownMajor,
-    ThumbsUpMajor,
-    ClipboardMinor
+    ThumbsUpMajor
     } from '@shopify/polaris-icons';
 
 function getLikes(id) {

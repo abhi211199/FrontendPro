@@ -4,8 +4,8 @@ import {DatePicker} from '@shopify/polaris';
 export default function DatePickerExample(props) {
   const [{month, year}, setDate] = useState({month: 1, year: 2018});
   const [selectedDates, setSelectedDates] = useState({
-    start: new Date('Wed Feb 07 2018 00:00:00 GMT-0500 (EST)'),
-    end: new Date('Mon Mar 12 2018 00:00:00 GMT-0500 (EST)'),
+    start: new Date('Wed Feb 07 2021 00:00:00 GMT-0500 (EST)'),
+    end: new Date('Mon Feb 12 2021 00:00:00 GMT-0500 (EST)'),
   });
 
   const handleMonthChange = useCallback(
